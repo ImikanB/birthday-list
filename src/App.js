@@ -5,8 +5,12 @@ import {names} from './data'
 const App = () => {
   const [people, setPeople] = useState(names);
   const number = people.length;
-  const handle = () => {
-    setPeople([]) 
+  // const handle = () => {
+  //   setPeople([]) 
+  // }
+  const removeBtn = (id) => {
+    let newPeople = people.filter((person) => person.id !== id)
+    setPeople(newPeople)
   }
   return (
     <>
@@ -16,6 +20,7 @@ const App = () => {
           const { id, name, age, img } = person
           return (
             <>
+            <section className='data'>
               <article key={id} className='item'>
                 <img src={img} alt='' />
                 <div>
@@ -23,10 +28,12 @@ const App = () => {
                   <p>{age} years</p>
                 </div>
               </article>
+              <button className='bn' onClick={() => removeBtn(id)}>Remove</button>
+              </section>
             </>
           )
         })}
-        <button className='btn' onClick={handle}>Clear All</button>
+        <button className='btn' onClick={() => setPeople([])}>Clear All</button>
       </section>
     </>
   )
